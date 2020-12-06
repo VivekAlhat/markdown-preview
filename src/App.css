@@ -24,4 +24,5 @@ h5 {
 .markdown {
   border: 0.5px solid gray;
   height: 65vh;
+  overflow: auto;
 }
