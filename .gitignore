@@ -25,3 +25,4 @@ yarn-error.log*
 # deployment
 /.netlify
 .netlify
+netlify
