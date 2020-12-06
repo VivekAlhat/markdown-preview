@@ -3,10 +3,17 @@ import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import ReactMarkdown from "react-markdown";
 import "./App.css";
 
+const marked = require("marked");
+
 function App() {
+  const [code, setInputCode] = useState("");
+
+  const handleInputChange = (e) => {
+    setInputCode(e.target.value);
+  };
+
   return (
     <div>
       <NavbarComponent />
@@ -25,12 +32,11 @@ function App() {
             here
           </a>
         </h6>
-        <hr />
       </div>
 
-      <div className="container mt-3">
+      <div className="container">
         <Row className="justify-content-md-center">
-          <Col className="text-center col-lg-6 col-md-6 col-sm-12 col-12">
+          <Col className="col-lg-6 col-md-6 col-sm-12 col-12">
             <h5>Input</h5>
             <Form.Group>
               <Form.Control
@@ -38,22 +44,18 @@ function App() {
                 id="textarea"
                 rows={17}
                 columns={30}
+                value={code}
+                onChange={handleInputChange}
                 autoComplete="false"
               />
             </Form.Group>
           </Col>
-          <Col className="text-center col-lg-6 col-md-6 col-sm-12 col-12">
+          <Col>
             <h5>Markdown</h5>
-            <Form.Group>
-              <Form.Control
-                as="textarea"
-                id="textarea"
-                className="markdown"
-                rows={17}
-                columns={30}
-                readOnly
-              />
-            </Form.Group>
+            <div
+              className="markdown p-2 col-lg-12 col-md-6 col-sm-12 col-12"
+              dangerouslySetInnerHTML={{ __html: marked(code) }}
+            ></div>
           </Col>
         </Row>
       </div>
